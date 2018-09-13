@@ -59,10 +59,9 @@ skip,limit可以用于分页查询。
 skip并不能提高查询效率，并且skip越大，查询效率越低。
 
 
-------------
+
+
+
 
 ### Link
 - [mongo常用运维.pdf](https://github.com/meacial/mongo_note/blob/master/mongo%E5%B8%B8%E7%94%A8%E8%BF%90%E7%BB%B4.pdf)
-
-
-> 以上只是我个人的见解，如果有不对的地方，大家可以交流！

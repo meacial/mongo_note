@@ -9,14 +9,14 @@
 `mongostat --host host:port -u user -p pswd --authenticationDatabase=admin`
 > 可以查看mongo每个collection占用cpu的时间
 
-`db.serverStatus() -- 查询当前db状态信息`
-`db.collection.stats() -- 某个collection的统计信息，比如平均document大小`
+> `db.serverStatus() -- 查询当前db状态信息`
+> `db.collection.stats() -- 某个collection的统计信息，比如平均document大小`
 
 ###### system.profile 排查慢查询语句
-`db.getProfilingLevel() -- 查询慢查询跟踪级别 {0-关闭， 1-定义慢查询操作，2-全部跟踪}`
-`db.setProfilingLevel(1,1000)  -- 设备慢查询跟踪级别为1,1000ms阈值`
-`db.getProfilingStatus()  -- 查询当前设置`
-`db.system.profile.find().sort({$natrual: -1}).limit(3) -- 查询最佳的慢查询语句`
+> `db.getProfilingLevel() -- 查询慢查询跟踪级别 {0-关闭， 1-定义慢查询操作，2-全部跟踪}`
+> `db.setProfilingLevel(1,1000)  -- 设备慢查询跟踪级别为1,1000ms阈值`
+> `db.getProfilingStatus()  -- 查询当前设置`
+> `db.system.profile.find().sort({$natrual: -1}).limit(3) -- 查询最佳的慢查询语句`
 
 ###### explain 查询计划分析
 `db.collection.find({...}).explain(true)`

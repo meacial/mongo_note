@@ -67,6 +67,23 @@ skip并不能提高查询效率，并且skip越大，查询效率越低。
 
 
 
+### mongo replicaset 重建索引
+**如果你发现之前的索引，查询比较慢，你想着重建一个索引，替换之前的。 一定要在新的索引创建完成后，再删除之前的索引**
+
+```
+1. 连接mongo复制集主节点  mongo --port {port1} --host {host1} 
+2. 查询复制集状态和成员    rs.status()
+3. 选择一个副节点，将它移除复制集  rs.remove('host2:port2')   （移除之前，确认移除后，剩下的节点可以完成主节点选举）
+4. 停止3中移除的节点，mongod --shutdown --dbpath {datapath2}  (也可以mongo --port {port2} --host {host2} > use admin > db.shutdownServer() )
+5. 以standlone方式启动4中停止的mongo实例  mongod --dbpath {datapath2}
+6. 连接5中启动的standlone实例，并创建索引
+7. 停止5启动的standlone实例  mongod --shutdown --dbpath {datapath2}
+8. 以复制集方式启动mongo实例，mongod --port {port2} --host {host2} --dbpath {datapath2} --replSet {replSetName}
+9. 登录复制集主节点，添加8中启动的实例  rs.add('host2:port2')， 等待该实例同步主节点的数据
+10. 将当前主节点降级为副节点 rs.stepDown()
+11. 重复4-9的步骤
+```
+
 
 
 ### Link
